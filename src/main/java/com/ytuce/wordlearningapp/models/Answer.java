@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -15,10 +17,15 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
-    private boolean correct;
-    private boolean userSelected;
-
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
+
+    @ManyToMany
+    @JoinTable(
+            name = "answer_word_with_meaning",
+            joinColumns = @JoinColumn(name = "answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "word_with_meaning_id")
+    )
+    private List<WordWithMeaning> wordWithMeanings;
 }

@@ -23,4 +23,9 @@ public class Quiz {
 
     @OneToMany(mappedBy = "quiz")
     private List<Question> questions;
+
+    public void addQuestion(Question question) {
+        question.setQuiz(this);
+        this.questions.add(question);
+    }
 }

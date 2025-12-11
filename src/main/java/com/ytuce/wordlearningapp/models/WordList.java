@@ -33,4 +33,19 @@ public class WordList {
 
     @OneToMany(mappedBy = "wordList")
     private List<Quiz> quizzes;
+
+    public void addWord(WordWithMeaning word) {
+        this.words.add(word);
+    }
+
+    public void removeWord(WordWithMeaning word) {
+        this.words.remove(word);
+    }
+
+    public Quiz createQuiz() {
+        Quiz quiz = new Quiz();
+        quiz.setWordList(this);
+        this.quizzes.add(quiz);
+        return quiz;
+    }
 }

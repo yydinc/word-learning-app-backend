@@ -23,4 +23,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<WordList> wordLists;
+
+    public void addWordList(WordList list) {
+        list.setUser(this);
+        this.wordLists.add(list);
+    }
 }

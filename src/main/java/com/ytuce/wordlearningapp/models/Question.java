@@ -33,4 +33,14 @@ public class Question {
 
     @OneToMany(mappedBy = "question")
     private List<Answer> userAnswers;
+
+    public void addUserAnswer(Answer answer) {
+        answer.setQuestion(this);
+        this.userAnswers.add(answer);
+    }
+
+    public void addCorrectAnswer(Answer answer) {
+        answer.setQuestion(this);
+        this.userAnswers.add(answer);
+    }
 }
