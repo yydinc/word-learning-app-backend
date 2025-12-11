@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class UserProfileResponse {
-    private Long id;
     private String email;
     private String name;
-    private LocalDateTime createdAt;
 }
