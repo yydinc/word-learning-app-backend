@@ -2,33 +2,27 @@ package com.ytuce.wordlearningapp.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "words")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long wordId;
 
-    private String lemma; // e.g. "claim"
+    private String writing;
+    private String wordType;
 
-    @Column(name = "word_type")
-    private String wordType; // noun, verb, adjective
+    @OneToMany(mappedBy = "word")
+    private List<ExampleSentence> exampleSentences;
 
-    @OneToMany(mappedBy = "word", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WordMeaning> meanings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "word", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WordRelation> relations = new ArrayList<>();
+    @OneToMany(mappedBy = "word")
+    private List<WordWithMeaning> meanings;
 }

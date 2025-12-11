@@ -1,30 +1,23 @@
 package com.ytuce.wordlearningapp.models;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "example_sentences")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ExampleSentence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long exampleSentenceId;
 
-    @ManyToOne
-    @JoinColumn(name = "meaning_id")
-    private WordMeaning meaning;
-
-    @Column(name = "sentence_en", columnDefinition = "TEXT")
+    private String sentenceTr;
     private String sentenceEn;
 
-    @Column(name = "sentence_tr", columnDefinition = "TEXT")
-    private String sentenceTr;
+    @ManyToOne
+    @JoinColumn(name = "word_with_meaning_id")
+    private WordWithMeaning word;
 }

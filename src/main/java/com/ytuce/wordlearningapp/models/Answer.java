@@ -2,27 +2,23 @@ package com.ytuce.wordlearningapp.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "quiz_question_answers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class QuizQuestionAnswer {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long answerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private boolean correct;
+    private boolean userSelected;
+
+    @ManyToOne
     @JoinColumn(name = "question_id")
-    private QuizQuestion question;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meaning_id")
-    private WordMeaning meaning;
+    private Question question;
 }

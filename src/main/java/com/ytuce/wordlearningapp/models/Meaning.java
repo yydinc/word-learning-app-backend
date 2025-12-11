@@ -11,16 +11,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Quiz {
+public class Meaning {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long quizId;
+    private Long meaningId;
 
-    @ManyToOne
-    @JoinColumn(name = "word_list_id")
-    private WordList wordList;
+    @OneToMany(mappedBy = "meaning")
+    private List<WordWithMeaning> wordMeanings;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "meaning")
     private List<Question> questions;
 }

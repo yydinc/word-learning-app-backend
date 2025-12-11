@@ -2,34 +2,35 @@ package com.ytuce.wordlearningapp.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "words")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class WordList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long wordListId;
 
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany
+    @JoinTable(
+            name = "word_list_word_meanings",
+            joinColumns = @JoinColumn(name = "word_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "word_with_meaning_id")
+    )
+    private List<WordWithMeaning> words;
 
-    @OneToMany(mappedBy = "word", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WordMeaning> meanings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "word", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WordRelation> relations = new ArrayList<>();
+    @OneToMany(mappedBy = "wordList")
+    private List<Quiz> quizzes;
 }
